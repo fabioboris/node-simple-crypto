@@ -1,11 +1,11 @@
 {
   "name": "simple-crypto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cryptography utility built with Node.js and Crypto module",
   "author": "Fabio Agostinho Boris <fabioboris@gmail>",
   "main": "simple-crypto.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/fabioboris/simple-crypto.git"
+    "url": "http://github.com/fabioboris/node-simple-crypto.git"
   }
 }
