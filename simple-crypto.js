@@ -112,7 +112,7 @@ var decipher = function(data, params) {
   
   // updated digest
   obj.update(data, params.output_encoding, params.input_encoding); // swapped input and output encoding
-  return obj.final(params.output_encoding);
+  return obj.final(params.input_encoding);
 };
 
 
