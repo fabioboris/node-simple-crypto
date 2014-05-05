@@ -20,7 +20,7 @@ var defaults = {
 
 // fills the missing params with default values
 function missingParams(params, defaults) {
-  for (k in defaults) {
+  for (var k in defaults) {
     switch (typeof params[k]) {
       case 'object':
         break;
@@ -120,7 +120,7 @@ var decipher = function(data, params) {
 var info = function() {
   var content = fs.readFileSync('./package.json');
   return JSON.parse(content);
-}
+};
 
 
 // exports
