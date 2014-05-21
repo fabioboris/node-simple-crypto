@@ -83,8 +83,11 @@ var cipher = function(data, params) {
 
   // cipher object
   var obj = crypto.createCipher(params.algorithm, params.password);
-  var buff = Buffer.concat([obj.update(new Buffer(data, params.input_encoding)), obj.final()]);
-  return buff.toString(params.output_encoding);
+  var update = obj.update(new Buffer(data, params.input_encoding));
+  var final = obj.final();
+  var res = typeof update === 'string' ? update : update.toString(params.output_encoding);
+  res += typeof final === 'string' ? final : final.toString(params.output_encoding);
+  return res;
 };
 
 
@@ -109,8 +112,11 @@ var decipher = function(data, params) {
   var obj = crypto.createDecipher(params.algorithm, params.password);
 
   // updated digest
-  var res = obj.update(new Buffer(data, params.output_encoding)); // swapped input and output encoding
-  return res += obj.final(params.input_encoding);
+  var update = obj.update(new Buffer(data, params.output_encoding)); // swapped input and output encoding
+  var final = obj.final(params.input_encoding);
+  var res = typeof update === 'string' ? update : update.toString(params.input_encoding);
+  res += typeof final === 'string' ? final : final.toString(params.input_encoding);
+  return res;
 };
 
 
