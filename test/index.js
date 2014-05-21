@@ -9,14 +9,15 @@
     options = {
       algorithm: 'aes256',
       password: 'icanhazsekretz'
-    };
+    },
+    possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   function stringOfLength(len) {
-    var s = [];
-    for(var i = 0; i < len; i++) {
-      s.push('a');
+    var s = '';
+    for (var i = 0; i < len; i++) {
+      s += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-    return s.join('');
+    return s
   }
 
   function verifyCipherDecipher(subject, options) {
@@ -55,6 +56,7 @@
       decrypted.should.equal('sekret');
     });
 
+
     it('should encrypt & decrypt string (LEN=15) AES256 UTF8 to HEX', function () {
       verifyCipherDecipher(stringOfLength(15), {
         password: options.password,
@@ -66,6 +68,17 @@
 
     it('should encrypt & decrypt string (LEN=16) AES256 UTF8 to HEX', function () {
       verifyCipherDecipher(stringOfLength(16), {
+        password: options.password,
+        algorithm: 'aes256',
+        input_encoding: 'utf8',
+        output_encoding: 'hex'
+      });
+    });
+
+    var str = stringOfLength(Math.floor(100 + Math.random() * 1000000));
+
+    it('should encrypt & decrypt string (LEN=' + str.length + ') AES256 UTF8 to HEX', function () {
+      verifyCipherDecipher(str, {
         password: options.password,
         algorithm: 'aes256',
         input_encoding: 'utf8',

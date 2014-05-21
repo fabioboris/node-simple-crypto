@@ -83,11 +83,9 @@ var cipher = function(data, params) {
 
   // cipher object
   var obj = crypto.createCipher(params.algorithm, params.password);
-  var update = obj.update(new Buffer(data, params.input_encoding));
-  var final = obj.final();
-  var res = typeof update === 'string' ? update : update.toString(params.output_encoding);
-  res += typeof final === 'string' ? final : final.toString(params.output_encoding);
-  return res;
+  var update = obj.update(new Buffer(data, params.input_encoding), params.input_encoding, params.output_encoding);
+  var final = obj.final(params.output_encoding);
+  return update + final;
 };
 
 
@@ -112,11 +110,13 @@ var decipher = function(data, params) {
   var obj = crypto.createDecipher(params.algorithm, params.password);
 
   // updated digest
+
+  // Note: There is an inconsistency between different versions of nodeJS and Decipher object.  When specifying
+  // output_encoding, it may return empty string.  Without output_encoding it will return buffer and we will do
+  // the decoding.
   var update = obj.update(new Buffer(data, params.output_encoding)); // swapped input and output encoding
-  var final = obj.final(params.input_encoding);
-  var res = typeof update === 'string' ? update : update.toString(params.input_encoding);
-  res += typeof final === 'string' ? final : final.toString(params.input_encoding);
-  return res;
+  var final = obj.final();
+  return update.toString(params.input_encoding) + final.toString(params.input_encoding);
 };
 
 
