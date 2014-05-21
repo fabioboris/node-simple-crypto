@@ -5,6 +5,7 @@
   'use strict';
 
   var sc = require('../simple-crypto'),
+    should = require('should'),
     options = {
       algorithm: 'aes256',
       password: 'icanhazsekretz'
