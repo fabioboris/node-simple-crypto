@@ -1,6 +1,6 @@
 {
   "name": "simple-crypto",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Cryptography utility built with Node.js and Crypto module",
   "author": "Fabio Agostinho Boris <fabioboris@gmail>",
   "main": "simple-crypto.js",
